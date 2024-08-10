@@ -19,6 +19,8 @@ export default function Chat() {
 
   const sendMessage = async () => {
     if (!message.trim() || isLoading) return;
+
+    setMessage("");
     setIsLoading(true);
 
     setMessages((messages) => [
@@ -42,9 +44,9 @@ export default function Chat() {
         body: JSON.stringify({ message }),
       });
 
-      if (!response.ok) {
-        throw new Error("Network response was not ok");
-      }
+      // if (!response.ok) {
+      //   throw new Error("Network response was not ok");
+      // }
 
       const { history } = await response.json();
 

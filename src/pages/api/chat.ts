@@ -53,7 +53,7 @@ export default async function POST(req: NextApiRequest, res: NextApiResponse) {
   let text = "";
   for await (const chunk of result.stream) {
     const chunkText = chunk.text();
-    console.log("----------new chunk text: ", chunkText, "-----------");
+    // console.log("----------new chunk text: ", chunkText, "-----------");
     text += chunkText;
   }
 
