@@ -1,5 +1,5 @@
-import Chat from "@/components/Chat";
+import ChatGemini from "@/app/(default)/chat/gemini/page";
 
 export default function Home() {
-  return <Chat />;
+  return <ChatGemini />;
 }

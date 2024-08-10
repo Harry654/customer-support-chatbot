@@ -1,12 +1,13 @@
 "use client";
 
 import { TParticipant } from "@/types";
-import { initialChat } from "@/utils/initialChat";
+import { initialChat } from "@/utils/initialChatLlama";
 import { Box, Button, Stack, TextField } from "@mui/material";
 import { useEffect, useRef, useState } from "react";
+import { Message } from "@aws-sdk/client-bedrock-runtime";
 
-export default function Chat() {
-  const [messages, setMessages] = useState<TParticipant[]>(
+export default function ChatGemini() {
+  const [messages, setMessages] = useState<Message[]>(
     initialChat.slice(1, initialChat.length)
   );
   const [message, setMessage] = useState<string>("");
@@ -27,7 +28,7 @@ export default function Chat() {
       ...messages,
       {
         role: "user",
-        parts: [
+        content: [
           {
             text: message.trim(),
           },
@@ -36,7 +37,7 @@ export default function Chat() {
     ]);
 
     try {
-      const response = await fetch("/api/chat", {
+      const response = await fetch("/api/chat_llama", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
@@ -75,8 +76,8 @@ export default function Chat() {
       setMessages((messages) => [
         ...messages,
         {
-          role: "model",
-          parts: [
+          role: "assistant",
+          content: [
             {
               text: "I'm sorry, I can't respond at the moment. Please try again later.",
             },
@@ -134,13 +135,15 @@ export default function Chat() {
               key={index}
               display="flex"
               justifyContent={
-                message.role === "model" ? "flex-start" : "flex-end"
+                message.role === "assistant" ? "flex-start" : "flex-end"
               }
             >
               <Box
                 sx={{
                   bgcolor:
-                    message.role === "model" ? "primary.main" : "warning.main",
+                    message.role === "assistant"
+                      ? "primary.main"
+                      : "warning.main",
                 }}
                 color={"white"}
                 borderRadius={2}
@@ -148,7 +151,7 @@ export default function Chat() {
                 py={2}
                 maxWidth="80%"
               >
-                {message.parts[0].text}
+                {message.content?.[0]?.text}
               </Box>
             </Box>
           ))}
