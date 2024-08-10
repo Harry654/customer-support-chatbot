@@ -1,18 +1,15 @@
 "use client";
 
+import { initialChat } from "@/utils/initialChat";
 import { Box, Button, Stack, TextField } from "@mui/material";
 import { useEffect, useRef, useState } from "react";
 
 export default function Chat() {
-  const [messages, setMessages] = useState([
-    {
-      role: "assistant",
-      content:
-        "Hi! Welcome to Silver Spoons restaurant. How can I make your dining experience delightful today?",
-    },
-  ]);
-  const [message, setMessage] = useState("");
-  const [isLoading, setIsLoading] = useState(false);
+  const [messages, setMessages] = useState(
+    initialChat.slice(1, initialChat.length)
+  );
+  const [message, setMessage] = useState<string>("");
+  const [isLoading, setIsLoading] = useState<boolean>(false);
   const messagesEndRef = useRef<HTMLDivElement>(null);
 
   const scrollToBottom = () => {
@@ -25,11 +22,16 @@ export default function Chat() {
 
     setMessages((messages) => [
       ...messages,
-      { role: "user", content: message },
-      { role: "assistant", content: "" },
+      {
+        role: "user",
+        parts: [
+          {
+            text: message.trim(),
+          },
+        ],
+      },
     ]);
 
-    setMessage("");
 
     try {
       const response = await fetch("/api/chat", {
@@ -37,39 +39,47 @@ export default function Chat() {
         headers: {
           "Content-Type": "application/json",
         },
-        body: JSON.stringify([...messages, { role: "user", content: message }]),
+        body: JSON.stringify({message}),
       });
 
       if (!response.ok) {
         throw new Error("Network response was not ok");
       }
 
-      const reader = response.body?.getReader();
-      const decoder = new TextDecoder();
 
-      if (reader) {
-        while (true) {
-          const result = await reader.read();
-          if (result.done) break;
-          const text = decoder.decode(result.value, { stream: true });
-          setMessages((messages) => {
-            let lastMessage = messages[messages.length - 1];
-            let otherMessages = messages.slice(0, messages.length - 1);
-            return [
-              ...otherMessages,
-              { ...lastMessage, content: lastMessage.content + text },
-            ];
-          });
-        }
-      }
+      const {  history } = await response.json();
+
+      setMessages(history.slice(1, history.length));
+
+      // const reader = response.body?.getReader();
+      // const decoder = new TextDecoder();
+
+      // if (reader) {
+      //   while (true) {
+      //     const result = await reader.read();
+      //     if (result.done) break;
+      //     const text = decoder.decode(result.value, { stream: true });
+      //     setMessages((messages) => {
+      //       let lastMessage = messages[messages.length - 1];
+      //       let otherMessages = messages.slice(0, messages.length - 1);
+      //       return [
+      //         ...otherMessages,
+      //         { ...lastMessage, content: lastMessage.content + text },
+      //       ];
+      //     });
+      //   }
+      // }
     } catch (error) {
       console.error("Error:", error);
       setMessages((messages) => [
-        ...messages.slice(0, messages.length - 1),
+        ...messages,
         {
-          role: "assistant",
-          content:
-            "I'm sorry, I can't respond at the moment. Please try again later.",
+          role: "model",
+          parts: [
+            {
+              text: "I'm sorry, I can't respond at the moment. Please try again later.",
+            },
+          ],
         },
       ]);
     }
@@ -98,7 +108,7 @@ export default function Chat() {
       flexDirection="column"
       justifyContent="center"
       alignItems="center"
-      bgcolor="rgba(0, 0, 0, 0.8)"
+      bgcolor="rgba(0, 0, 0, 0.9)"
     >
       <Stack
         direction={"column"}
@@ -108,7 +118,7 @@ export default function Chat() {
         spacing={3}
         sx={{
           backdropFilter: "blur(5px)",
-          backgroundColor: "rgba(0, 0, 0, 0.5)",
+          backgroundColor: "rgba(255, 255, 255, 0.2)",
         }}
       >
         <Stack
@@ -123,23 +133,21 @@ export default function Chat() {
               key={index}
               display="flex"
               justifyContent={
-                message.role === "assistant" ? "flex-start" : "flex-end"
+                message.role === "model" ? "flex-start" : "flex-end"
               }
             >
               <Box
                 sx={{
                   bgcolor:
-                    message.role === "assistant"
-                      ? "primary.main"
-                      : "text.secondary",
+                    message.role === "model" ? "primary.main" : "warning.main",
                 }}
-                color={message.role === "assistant" ? "black" : "white"}
+                color={"white"}
                 borderRadius={2}
                 px={2}
                 py={2}
                 maxWidth="80%"
               >
-                {message.content}
+                {message.parts[0].text}
               </Box>
             </Box>
           ))}
@@ -154,7 +162,6 @@ export default function Chat() {
             onChange={(e) => setMessage(e.target.value)}
             onKeyPress={handleKeyPress}
             disabled={isLoading}
-            color="info"
           />
           <Button
             variant="contained"
