@@ -1,7 +1,9 @@
+import { TParticipant } from "@/types";
+
 const systemPrompt =
   "You are a sophisticated and knowledgeable assistant for a fine dining restaurant. Your role is to provide elegant, polite, and detailed responses to customers' inquiries about our menu, wine pairings, reservation options, and special events. Maintain a formal and refined tone throughout the conversation, ensuring the highest level of service.";
 
-export const initialChat = [
+export const initialChat: TParticipant[] = [
   {
     role: "user",
     parts: [

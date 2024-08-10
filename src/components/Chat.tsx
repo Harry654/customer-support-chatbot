@@ -1,11 +1,12 @@
 "use client";
 
+import { TParticipant } from "@/types";
 import { initialChat } from "@/utils/initialChat";
 import { Box, Button, Stack, TextField } from "@mui/material";
 import { useEffect, useRef, useState } from "react";
 
 export default function Chat() {
-  const [messages, setMessages] = useState(
+  const [messages, setMessages] = useState<TParticipant[]>(
     initialChat.slice(1, initialChat.length)
   );
   const [message, setMessage] = useState<string>("");
@@ -32,22 +33,20 @@ export default function Chat() {
       },
     ]);
 
-
     try {
       const response = await fetch("/api/chat", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
         },
-        body: JSON.stringify({message}),
+        body: JSON.stringify({ message }),
       });
 
       if (!response.ok) {
         throw new Error("Network response was not ok");
       }
 
-
-      const {  history } = await response.json();
+      const { history } = await response.json();
 
       setMessages(history.slice(1, history.length));
 
