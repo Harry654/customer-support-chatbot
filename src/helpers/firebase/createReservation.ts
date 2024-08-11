@@ -12,7 +12,7 @@ import { doc, setDoc } from "firebase/firestore";
 
 async function createReservation(reservation: TReservation) {
   try {
-    const reservationId = new Date().toISOString(); // Unique ID for the reservation
+    const reservationId = new Date().toString(); // Unique ID for the reservation
     const reservationRef = doc(db, "reservations", reservationId);
 
     await setDoc(reservationRef, {

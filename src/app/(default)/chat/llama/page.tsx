@@ -6,9 +6,7 @@ import { Box, Button, Stack, TextField } from "@mui/material";
 import { useEffect, useRef, useState } from "react";
 
 export default function ChatGemini() {
-  const [messages, setMessages] = useState<Message[]>(
-    initialChat.slice(1, initialChat.length)
-  );
+  const [messages, setMessages] = useState<Message[]>(initialChat);
   const [message, setMessage] = useState<string>("");
   const [isLoading, setIsLoading] = useState<boolean>(false);
   const messagesEndRef = useRef<HTMLDivElement>(null);
@@ -41,7 +39,19 @@ export default function ChatGemini() {
         headers: {
           "Content-Type": "application/json",
         },
-        body: JSON.stringify({ message }),
+        body: JSON.stringify({
+          messages: [
+            ...messages,
+            {
+              role: "user",
+              content: [
+                {
+                  text: message.trim(),
+                },
+              ],
+            },
+          ],
+        }),
       });
 
       // if (!response.ok) {
@@ -50,7 +60,7 @@ export default function ChatGemini() {
 
       const { history } = await response.json();
 
-      setMessages(history.slice(1, history.length));
+      setMessages(history);
 
       // const reader = response.body?.getReader();
       // const decoder = new TextDecoder();
@@ -129,7 +139,7 @@ export default function ChatGemini() {
           overflow="auto"
           maxHeight="100%"
         >
-          {messages.map((message, index) => (
+          {messages.slice(1).map((message, index) => (
             <Box
               key={index}
               display="flex"

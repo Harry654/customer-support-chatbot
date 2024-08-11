@@ -3,6 +3,7 @@ import { NextApiRequest, NextApiResponse } from "next";
 import {
   BedrockRuntimeClient,
   ConverseCommand,
+  Message,
 } from "@aws-sdk/client-bedrock-runtime";
 import { processLlamaResponse } from "@/helpers/processLlamaResponse";
 
@@ -15,14 +16,14 @@ const client = new BedrockRuntimeClient({
   },
 });
 
-let chatHistory = initialChat;
+// let chatHistory = initialChat;
 const modelId = "meta.llama3-70b-instruct-v1:0";
 
 // Function to invoke the model with chat history
-async function invokeLlamaModel(inputMessage: string) {
+async function invokeLlamaModel(messages: Message[]) {
   const command = new ConverseCommand({
     modelId,
-    messages: chatHistory,
+    messages,
     inferenceConfig: { maxTokens: 512, temperature: 0.5, topP: 0.9 },
   });
 
@@ -37,36 +38,29 @@ async function invokeLlamaModel(inputMessage: string) {
 
 // POST function to handle incoming requests
 export default async function POST(req: NextApiRequest, res: NextApiResponse) {
-  const { message } = req.body; // Parse the JSON body of the incoming request
-
-  // Update chat history with user's message
-  chatHistory = [
-    ...chatHistory,
-    { role: "user", content: [{ text: message }] },
-  ];
+  const { messages } = req.body; // Parse the JSON body of the incoming request
 
   try {
     // Wait for the model to process the input message
-    const response = await invokeLlamaModel(message);
+    const response = await invokeLlamaModel(messages);
 
     // Safely extract the response content
     let assistantResponse =
       response?.output?.message?.content?.[0]?.text ||
       "No response from model.";
-    console.log(assistantResponse);
+    // console.log(assistantResponse);
 
     assistantResponse = await processLlamaResponse(assistantResponse);
-    console.log("--------------", assistantResponse, "--------------------");
+    // console.log("--------------", assistantResponse, "--------------------");
 
     // Update chat history with the assistant's response
-    chatHistory = [
-      ...chatHistory,
+    const responseMessages = [
+      ...messages,
       { role: "assistant", content: [{ text: assistantResponse }] },
     ];
 
-
     // Return the updated chat history as a JSON response
-    return res.json({ history: chatHistory });
+    return res.json({ history: responseMessages });
   } catch (error) {
     console.error("Invocation failed:", error);
     return res.status(500).json({ error: "Failed to invoke LLaMA model." });
