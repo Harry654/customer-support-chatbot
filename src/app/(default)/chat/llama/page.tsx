@@ -1,10 +1,9 @@
 "use client";
 
-import { TParticipant } from "@/types";
 import { initialChat } from "@/utils/initialChatLlama";
+import { Message } from "@aws-sdk/client-bedrock-runtime";
 import { Box, Button, Stack, TextField } from "@mui/material";
 import { useEffect, useRef, useState } from "react";
-import { Message } from "@aws-sdk/client-bedrock-runtime";
 
 export default function ChatGemini() {
   const [messages, setMessages] = useState<Message[]>(

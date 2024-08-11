@@ -4,6 +4,7 @@ import {
   BedrockRuntimeClient,
   ConverseCommand,
 } from "@aws-sdk/client-bedrock-runtime";
+import { processLlamaResponse } from "@/helpers/processLlamaResponse";
 
 // Initialize the Bedrock client
 const client = new BedrockRuntimeClient({
@@ -49,7 +50,13 @@ export default async function POST(req: NextApiRequest, res: NextApiResponse) {
     const response = await invokeLlamaModel(message);
 
     // Safely extract the response content
-    const assistantResponse = response?.output?.message?.content?.[0]?.text || "No response from model.";
+    let assistantResponse =
+      response?.output?.message?.content?.[0]?.text ||
+      "No response from model.";
+    console.log(assistantResponse);
+
+    assistantResponse = await processLlamaResponse(assistantResponse);
+    console.log("--------------", assistantResponse, "--------------------");
 
     // Update chat history with the assistant's response
     chatHistory = [
@@ -57,7 +64,6 @@ export default async function POST(req: NextApiRequest, res: NextApiResponse) {
       { role: "assistant", content: [{ text: assistantResponse }] },
     ];
 
-    console.log(chatHistory);
 
     // Return the updated chat history as a JSON response
     return res.json({ history: chatHistory });
