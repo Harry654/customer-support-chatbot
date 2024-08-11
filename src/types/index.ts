@@ -8,18 +8,18 @@ export type TParticipant = {
 };
 
 export type TFirebaseActionTypes = "INSERT" | "UPDATE" | "DELETE";
-export type IFirebaseActionData =
-  | {
-      email: string;
-      date: string;
-      time: string;
-      guests: number;
-      action: TFirebaseActionTypes;
-    }
-  | { [key: string]: any };
+export type IFirebaseActionData = {
+  email: string;
+  date: string;
+  time: string;
+  guests: number;
+  action: TFirebaseActionTypes;
+  name: string;
+};
 
 export type TReservation = {
   email: string;
   date: Timestamp;
   guests: number;
+  name: string;
 };

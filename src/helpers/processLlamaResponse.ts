@@ -38,6 +38,7 @@ async function handleFirebaseAction(actionData: IFirebaseActionData) {
         email: actionData.email,
         date: firebaseTimestamp,
         guests: actionData.guests,
+        name: actionData.name,
       };
       // Call your function to insert data into Firebase
       createReservation(data);

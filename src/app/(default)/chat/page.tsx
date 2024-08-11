@@ -1,13 +1,15 @@
 "use client";
 
+import { useChat } from "@/context/ChatContext";
 import { initialChat } from "@/utils/initialChatLlama";
 import { Message } from "@aws-sdk/client-bedrock-runtime";
 import { Box, Button, Stack, TextField } from "@mui/material";
 import { useEffect, useRef, useState } from "react";
 
 export default function ChatGemini() {
-  const [messages, setMessages] = useState<Message[]>(initialChat);
+  const { messages, updateMessages } = useChat();
   const [message, setMessage] = useState<string>("");
+
   const [isLoading, setIsLoading] = useState<boolean>(false);
   const messagesEndRef = useRef<HTMLDivElement>(null);
 
@@ -21,7 +23,7 @@ export default function ChatGemini() {
     setMessage("");
     setIsLoading(true);
 
-    setMessages((messages) => [
+    updateMessages([
       ...messages,
       {
         role: "user",
@@ -60,7 +62,7 @@ export default function ChatGemini() {
 
       const { history } = await response.json();
 
-      setMessages(history);
+      updateMessages(history);
 
       // const reader = response.body?.getReader();
       // const decoder = new TextDecoder();
@@ -70,7 +72,7 @@ export default function ChatGemini() {
       //     const result = await reader.read();
       //     if (result.done) break;
       //     const text = decoder.decode(result.value, { stream: true });
-      //     setMessages((messages) => {
+      //     updateMessages((messages) => {
       //       let lastMessage = messages[messages.length - 1];
       //       let otherMessages = messages.slice(0, messages.length - 1);
       //       return [
@@ -82,7 +84,7 @@ export default function ChatGemini() {
       // }
     } catch (error) {
       console.error("Error:", error);
-      setMessages((messages) => [
+      updateMessages([
         ...messages,
         {
           role: "assistant",
@@ -129,7 +131,7 @@ export default function ChatGemini() {
         spacing={3}
         sx={{
           backdropFilter: "blur(5px)",
-          backgroundColor: "rgba(255, 255, 255, 0.2)",
+          backgroundColor: "rgba(0, 0, 0, 0.9)",
         }}
       >
         <Stack
@@ -175,6 +177,12 @@ export default function ChatGemini() {
             onChange={(e) => setMessage(e.target.value)}
             onKeyPress={handleKeyPress}
             disabled={isLoading}
+            InputProps={{
+              style: { color: "white" }, // Change input text color to white
+            }}
+            InputLabelProps={{
+              style: { color: "white" }, // Change label color to white
+            }}
           />
           <Button
             variant="contained"
