@@ -16,17 +16,17 @@ export default function Home() {
   return (
     <>
       <Head>
-        <script src="js/jquery-1.12.1.min.js"></script>
-        <script src="js/popper.min.js"></script>
-        <script src="js/bootstrap.min.js"></script>
-        <script src="js/jquery.magnific-popup.js"></script>
-        <script src="js/swiper.min.js"></script>
-        <script src="js/masonry.pkgd.js"></script>
-        <script src="js/owl.carousel.min.js"></script>
-        <script src="js/slick.min.js"></script>
-        <script src="js/gijgo.min.js"></script>
-        <script src="js/jquery.nice-select.min.js"></script>
-        <script src="js/custom.js"></script>
+        <script src="js/jquery-1.12.1.min.js" async={true}></script>
+        <script src="js/popper.min.js" async={true}></script>
+        <script src="js/bootstrap.min.js" async={true}></script>
+        <script src="js/jquery.magnific-popup.js" async={true}></script>
+        <script src="js/swiper.min.js" async={true}></script>
+        <script src="js/masonry.pkgd.js" async={true}></script>
+        <script src="js/owl.carousel.min.js" async={true}></script>
+        <script src="js/slick.min.js" async={true}></script>
+        <script src="js/gijgo.min.js" async={true}></script>
+        <script src="js/jquery.nice-select.min.js" async={true}></script>
+        <script src="js/custom.js" async={true}></script>
       </Head>
 
       <div style={{ overflowY: modalState ? "hidden" : "scroll" }}>
@@ -141,8 +141,8 @@ export default function Home() {
                     </h5>
                     <h1>Deliciousness jumping into the mouth</h1>
                     <p>
-                      Together creeping heaven upon third dominion be upon won't
-                      darkness rule land behold it created good saw after she'd
+                      Together creeping heaven upon third dominion be upon won&appso;t
+                      darkness rule land behold it created good saw after she&appso;d
                       Our set living. Signs midst dominion creepeth morning
                     </p>
                   </div>
@@ -151,7 +151,6 @@ export default function Home() {
             </div>
           </div>
         </section>
-
 
         <section id="book_a_table" className="regervation_part section_padding">
           <div className="container">
@@ -260,7 +259,6 @@ export default function Home() {
           </div>
         </section>
 
-
         <section className="about_part">
           <div className="container-fluid">
             <div className="row align-items-center">
@@ -288,10 +286,6 @@ export default function Home() {
             </div>
           </div>
         </section>
-
-
-    
-
 
         <section className="food_menu gray_bg">
           <div className="container">
@@ -379,7 +373,7 @@ export default function Home() {
                           />
                           <div className="media-body align-self-center">
                             <h3>Pork Sandwich</h3>
-                            <p>They're wherein heaven seed hath nothing</p>
+                            <p>They&appso;re wherein heaven seed hath nothing</p>
                             <h5>$40.00</h5>
                           </div>
                         </div>
@@ -391,7 +385,7 @@ export default function Home() {
                           />
                           <div className="media-body align-self-center">
                             <h3>Roasted Marrow</h3>
-                            <p>They're wherein heaven seed hath nothing</p>
+                            <p>They&appso;re wherein heaven seed hath nothing</p>
                             <h5>$40.00</h5>
                           </div>
                         </div>
@@ -403,7 +397,7 @@ export default function Home() {
                           />
                           <div className="media-body align-self-center">
                             <h3>Summer Cooking</h3>
-                            <p>They're wherein heaven seed hath nothing</p>
+                            <p>They&appso;re wherein heaven seed hath nothing</p>
                             <h5>$40.00</h5>
                           </div>
                         </div>
@@ -417,7 +411,7 @@ export default function Home() {
                           />
                           <div className="media-body align-self-center">
                             <h3>Easter Delight</h3>
-                            <p>They're wherein heaven seed hath nothing</p>
+                            <p>They&appso;re wherein heaven seed hath nothing</p>
                             <h5>$40.00</h5>
                           </div>
                         </div>
@@ -429,7 +423,7 @@ export default function Home() {
                           />
                           <div className="media-body align-self-center">
                             <h3>Tiener Schnitze</h3>
-                            <p>They're wherein heaven seed hath nothing</p>
+                            <p>They&appso;re wherein heaven seed hath nothing</p>
                             <h5>$40.00</h5>
                           </div>
                         </div>
@@ -441,7 +435,7 @@ export default function Home() {
                           />
                           <div className="media-body align-self-center">
                             <h3>Chicken Roast</h3>
-                            <p>They're wherein heaven seed hath nothing</p>
+                            <p>They&appso;re wherein heaven seed hath nothing</p>
                             <h5>$40.00</h5>
                           </div>
                         </div>
@@ -464,7 +458,7 @@ export default function Home() {
                           />
                           <div className="media-body align-self-center">
                             <h3>Easter Delight</h3>
-                            <p>They're wherein heaven seed hath nothing</p>
+                            <p>They&appso;re wherein heaven seed hath nothing</p>
                             <h5>$40.00</h5>
                           </div>
                         </div>
@@ -476,7 +470,7 @@ export default function Home() {
                           />
                           <div className="media-body align-self-center">
                             <h3>Tiener Schnitze</h3>
-                            <p>They're wherein heaven seed hath nothing</p>
+                            <p>They&appso;re wherein heaven seed hath nothing</p>
                             <h5>$40.00</h5>
                           </div>
                         </div>
@@ -488,7 +482,7 @@ export default function Home() {
                           />
                           <div className="media-body align-self-center">
                             <h3>Chicken Roast</h3>
-                            <p>They're wherein heaven seed hath nothing</p>
+                            <p>They&appso;re wherein heaven seed hath nothing</p>
                             <h5>$40.00</h5>
                           </div>
                         </div>
@@ -502,7 +496,7 @@ export default function Home() {
                           />
                           <div className="media-body align-self-center">
                             <h3>Pork Sandwich</h3>
-                            <p>They're wherein heaven seed hath nothing</p>
+                            <p>They&appso;re wherein heaven seed hath nothing</p>
                             <h5>$40.00</h5>
                           </div>
                         </div>
@@ -514,7 +508,7 @@ export default function Home() {
                           />
                           <div className="media-body align-self-center">
                             <h3>Roasted Marrow</h3>
-                            <p>They're wherein heaven seed hath nothing</p>
+                            <p>They&appso;re wherein heaven seed hath nothing</p>
                             <h5>$40.00</h5>
                           </div>
                         </div>
@@ -526,7 +520,7 @@ export default function Home() {
                           />
                           <div className="media-body align-self-center">
                             <h3>Summer Cooking</h3>
-                            <p>They're wherein heaven seed hath nothing</p>
+                            <p>They&appso;re wherein heaven seed hath nothing</p>
                             <h5>$40.00</h5>
                           </div>
                         </div>
@@ -549,7 +543,7 @@ export default function Home() {
                           />
                           <div className="media-body align-self-center">
                             <h3>Pork Sandwich</h3>
-                            <p>They're wherein heaven seed hath nothing</p>
+                            <p>They&appso;re wherein heaven seed hath nothing</p>
                             <h5>$40.00</h5>
                           </div>
                         </div>
@@ -561,7 +555,7 @@ export default function Home() {
                           />
                           <div className="media-body align-self-center">
                             <h3>Roasted Marrow</h3>
-                            <p>They're wherein heaven seed hath nothing</p>
+                            <p>They&appso;re wherein heaven seed hath nothing</p>
                             <h5>$40.00</h5>
                           </div>
                         </div>
@@ -573,7 +567,7 @@ export default function Home() {
                           />
                           <div className="media-body align-self-center">
                             <h3>Summer Cooking</h3>
-                            <p>They're wherein heaven seed hath nothing</p>
+                            <p>They&appso;re wherein heaven seed hath nothing</p>
                             <h5>$40.00</h5>
                           </div>
                         </div>
@@ -587,7 +581,7 @@ export default function Home() {
                           />
                           <div className="media-body align-self-center">
                             <h3>Easter Delight</h3>
-                            <p>They're wherein heaven seed hath nothing</p>
+                            <p>They&appso;re wherein heaven seed hath nothing</p>
                             <h5>$40.00</h5>
                           </div>
                         </div>
@@ -599,7 +593,7 @@ export default function Home() {
                           />
                           <div className="media-body align-self-center">
                             <h3>Tiener Schnitze</h3>
-                            <p>They're wherein heaven seed hath nothing</p>
+                            <p>They&appso;re wherein heaven seed hath nothing</p>
                             <h5>$40.00</h5>
                           </div>
                         </div>
@@ -611,7 +605,7 @@ export default function Home() {
                           />
                           <div className="media-body align-self-center">
                             <h3>Chicken Roast</h3>
-                            <p>They're wherein heaven seed hath nothing</p>
+                            <p>They&appso;re wherein heaven seed hath nothing</p>
                             <h5>$40.00</h5>
                           </div>
                         </div>
@@ -634,7 +628,7 @@ export default function Home() {
                           />
                           <div className="media-body align-self-center">
                             <h3>Easter Delight</h3>
-                            <p>They're wherein heaven seed hath nothing</p>
+                            <p>They&appso;re wherein heaven seed hath nothing</p>
                             <h5>$40.00</h5>
                           </div>
                         </div>
@@ -646,7 +640,7 @@ export default function Home() {
                           />
                           <div className="media-body align-self-center">
                             <h3>Tiener Schnitze</h3>
-                            <p>They're wherein heaven seed hath nothing</p>
+                            <p>They&appso;re wherein heaven seed hath nothing</p>
                             <h5>$40.00</h5>
                           </div>
                         </div>
@@ -658,7 +652,7 @@ export default function Home() {
                           />
                           <div className="media-body align-self-center">
                             <h3>Chicken Roast</h3>
-                            <p>They're wherein heaven seed hath nothing</p>
+                            <p>They&appso;re wherein heaven seed hath nothing</p>
                             <h5>$40.00</h5>
                           </div>
                         </div>
@@ -672,7 +666,7 @@ export default function Home() {
                           />
                           <div className="media-body align-self-center">
                             <h3>Pork Sandwich</h3>
-                            <p>They're wherein heaven seed hath nothing</p>
+                            <p>They&appso;re wherein heaven seed hath nothing</p>
                             <h5>$40.00</h5>
                           </div>
                         </div>
@@ -684,7 +678,7 @@ export default function Home() {
                           />
                           <div className="media-body align-self-center">
                             <h3>Roasted Marrow</h3>
-                            <p>They're wherein heaven seed hath nothing</p>
+                            <p>They&appso;re wherein heaven seed hath nothing</p>
                             <h5>$40.00</h5>
                           </div>
                         </div>
@@ -696,7 +690,7 @@ export default function Home() {
                           />
                           <div className="media-body align-self-center">
                             <h3>Summer Cooking</h3>
-                            <p>They're wherein heaven seed hath nothing</p>
+                            <p>They&appso;re wherein heaven seed hath nothing</p>
                             <h5>$40.00</h5>
                           </div>
                         </div>
@@ -719,7 +713,7 @@ export default function Home() {
                           />
                           <div className="media-body align-self-center">
                             <h3>Pork Sandwich</h3>
-                            <p>They're wherein heaven seed hath nothing</p>
+                            <p>They&appso;re wherein heaven seed hath nothing</p>
                             <h5>$40.00</h5>
                           </div>
                         </div>
@@ -731,7 +725,7 @@ export default function Home() {
                           />
                           <div className="media-body align-self-center">
                             <h3>Roasted Marrow</h3>
-                            <p>They're wherein heaven seed hath nothing</p>
+                            <p>They&appso;re wherein heaven seed hath nothing</p>
                             <h5>$40.00</h5>
                           </div>
                         </div>
@@ -743,7 +737,7 @@ export default function Home() {
                           />
                           <div className="media-body align-self-center">
                             <h3>Summer Cooking</h3>
-                            <p>They're wherein heaven seed hath nothing</p>
+                            <p>They&appso;re wherein heaven seed hath nothing</p>
                             <h5>$40.00</h5>
                           </div>
                         </div>
@@ -757,7 +751,7 @@ export default function Home() {
                           />
                           <div className="media-body align-self-center">
                             <h3>Easter Delight</h3>
-                            <p>They're wherein heaven seed hath nothing</p>
+                            <p>They&appso;re wherein heaven seed hath nothing</p>
                             <h5>$40.00</h5>
                           </div>
                         </div>
@@ -769,7 +763,7 @@ export default function Home() {
                           />
                           <div className="media-body align-self-center">
                             <h3>Tiener Schnitze</h3>
-                            <p>They're wherein heaven seed hath nothing</p>
+                            <p>They&appso;re wherein heaven seed hath nothing</p>
                             <h5>$40.00</h5>
                           </div>
                         </div>
@@ -781,7 +775,7 @@ export default function Home() {
                           />
                           <div className="media-body align-self-center">
                             <h3>Chicken Roast</h3>
-                            <p>They're wherein heaven seed hath nothing</p>
+                            <p>They&appso;re wherein heaven seed hath nothing</p>
                             <h5>$40.00</h5>
                           </div>
                         </div>
@@ -794,7 +788,6 @@ export default function Home() {
           </div>
         </section>
 
-     
         <footer className="footer-area">
           <div className="container">
             <div className="row">
@@ -802,7 +795,7 @@ export default function Home() {
                 <div className="single-footer-widget footer_1">
                   <h4>About Us</h4>
                   <p>
-                    Heaven fruitful doesn't over for these theheaven fruitful
+                    Heaven fruitful doesn&appso;t over for these theheaven fruitful
                     doe over days appear creeping seasons sad behold beari ath
                     of it fly signs bearing be one blessed after.
                   </p>
@@ -853,7 +846,7 @@ export default function Home() {
                 <div className="single-footer-widget footer_3">
                   <h4>Newsletter</h4>
                   <p>
-                    Heaven fruitful doesn't over lesser in days. Appear creeping
+                    Heaven fruitful doesn&appso;t over lesser in days. Appear creeping
                     seas
                   </p>
                   <form action="#">
