@@ -1,8 +1,9 @@
 import { auth, db } from "@/lib/firebase/config";
 import { TReservation } from "@/types";
 import { doc, setDoc } from "firebase/firestore";
-import { sendEmail } from "../nodemailer/nodemailer";
+import { sendEmail } from "../nodemailer";
 import { generateRandomId } from "../generateRandomId";
+import { getCurrentUser } from "../getCurrentUser";
 
 /**
  * Function to create a reservation in Firebase Firestore
@@ -24,7 +25,9 @@ async function createReservation(reservation: TReservation) {
       guests: reservation.guests,
       name: reservation.name,
     };
-    if (auth.currentUser)
+    // console.log("userrrrrrrrr", await getCurrentUser());
+    // console.log("idddddddddddd", auth.currentUser?.uid);
+    if (auth.currentUser?.uid)
       reservationData = { ...reservationData, user_id: auth.currentUser.uid };
 
     await setDoc(reservationRef, reservationData);
@@ -40,6 +43,18 @@ async function createReservation(reservation: TReservation) {
     console.error("Error creating reservation:", error);
     throw error;
   }
+  console.log(
+    "🚀 ~ createReservation ~ auth.currentUser?.uid:",
+    auth.currentUser?.uid
+  );
+  console.log(
+    "🚀 ~ createReservation ~ auth.currentUser?.uid:",
+    auth.currentUser?.uid
+  );
+  console.log(
+    "🚀 ~ createReservation ~ auth.currentUser?.uid:",
+    auth.currentUser?.uid
+  );
 }
 
 export default createReservation;

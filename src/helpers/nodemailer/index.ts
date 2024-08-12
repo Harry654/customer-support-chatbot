@@ -8,12 +8,10 @@ export async function sendEmail(
 ): Promise<void> {
   // Create a transporter object using the default SMTP transport
   const transporter = nodemailer.createTransport({
-    host: "smtp.gmail.email",
-    port: 587,
-    secure: false, 
-    auth: {
-      user: "harrisonderick64@gmail.com", // Your SMTP username
-      pass: "LR9yZegb0Zsc_Sh", // Your SMTP password
+    service: "gmail",
+    auth: { 
+      user: process.env.SMTP_USER, // Your SMTP username
+      pass: process.env.SMTP_SECRET, // Your SMTP password
     },
   });
 

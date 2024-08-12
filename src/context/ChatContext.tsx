@@ -49,7 +49,7 @@ export const ChatProvider: React.FC<{ children: ReactNode }> = ({
         auth.currentUser?.displayName
       }, email=${
         auth.currentUser?.email
-      }. Seperate the response for the user customer to confirm the details from the one that delivers that the tickets have been sent to the email. You don't have to call the customer by name for each response you make.`;
+      }. Always follow these steps: collect necesssary details(date, time, number of guests), confirm name, confirm email, ask if they would like to preorder any dishes or have any special requests, confirm details, then send success message. Strict instruction: Only ask one question per response like a customer support assistant would to avoid confusions. Also You don't have to call the customer by name for each response you make.`;
     };
 
     const initialChat: Message[] = [

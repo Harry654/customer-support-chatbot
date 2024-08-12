@@ -29,7 +29,7 @@ export default function Home() {
         <script src="js/custom.js"></script>
       </Head>
 
-      <body style={{ overflowY: modalState ? "hidden" : "scroll" }}>
+      <div style={{ overflowY: modalState ? "hidden" : "scroll" }}>
         <ChatModal
           isOpen={modalState}
           handleClose={() => handleOpenModal(false)}
@@ -906,7 +906,7 @@ export default function Home() {
             </div>
           </div>
         </footer>
-      </body>
+      </div>
     </>
   );
 }
