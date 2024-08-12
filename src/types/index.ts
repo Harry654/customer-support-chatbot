@@ -9,6 +9,7 @@ export type TParticipant = {
 
 export type TFirebaseActionTypes = "INSERT" | "UPDATE" | "DELETE";
 export type IFirebaseActionData = {
+  user_id?: string;
   email: string;
   date: string;
   time: string;
@@ -18,6 +19,7 @@ export type IFirebaseActionData = {
 };
 
 export type TReservation = {
+  user_id?: string;
   email: string;
   date: Timestamp;
   guests: number;

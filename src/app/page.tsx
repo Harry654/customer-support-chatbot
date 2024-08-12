@@ -1,10 +1,18 @@
 "use client";
 
+import ChatModal from "@/components/ChatModal";
 import { useAuth } from "@/context/AuthContext";
 import Head from "next/head";
+import { useState } from "react";
+import Chat from "@/components/Chat";
 
 export default function Home() {
   const { user } = useAuth();
+  const [modalState, setModalState] = useState<boolean>(false);
+
+  const handleOpenModal: Function = (newState: boolean): void =>
+    setModalState(newState);
+
   return (
     <>
       <Head>
@@ -21,11 +29,18 @@ export default function Home() {
         <script src="js/custom.js"></script>
       </Head>
 
-      <body>
+      <body style={{ overflowY: modalState ? "hidden" : "scroll" }}>
+        <ChatModal
+          isOpen={modalState}
+          handleClose={() => handleOpenModal(false)}
+        >
+          <Chat />
+        </ChatModal>
+
         <header className="main_menu home_menu">
           <div className="container">
             <div className="row align-items-center">
-              <div className="col-lg-12">
+              <div className="col-lg-12 z-10">
                 <nav className="navbar navbar-expand-lg navbar-light">
                   <a className="navbar-brand" href="/">
                     <img id="logo" src="/img/logo.png" alt="logo" />
@@ -130,22 +145,6 @@ export default function Home() {
                       darkness rule land behold it created good saw after she'd
                       Our set living. Signs midst dominion creepeth morning
                     </p>
-                    <div className="banner_btn">
-                      <div className="banner_btn_iner">
-                        <a href="#" className="btn_2">
-                          Reservation <img src="/img/icon/left_1.svg" alt="" />
-                        </a>
-                      </div>
-                      <a
-                        href="https://www.youtube.com/watch?v=pBFQdxA-apI"
-                        className="popup-youtube video_popup"
-                      >
-                        <span>
-                          <img src="/img/icon/play.svg" alt="" />
-                        </span>{" "}
-                        Watch our story
-                      </a>
-                    </div>
                   </div>
                 </div>
               </div>
@@ -153,88 +152,114 @@ export default function Home() {
           </div>
         </section>
 
-        <section className="exclusive_item_part blog_item_section">
+
+        <section id="book_a_table" className="regervation_part section_padding">
           <div className="container">
             <div className="row">
               <div className="col-xl-5">
                 <div className="section_tittle">
-                  <p>Popular Dishes</p>
-                  <h2>Our Exclusive Items</h2>
+                  <p>Reservation</p>
+                  <h2>Book A Table</h2>
                 </div>
               </div>
             </div>
             <div className="row">
-              <div className="col-sm-6 col-lg-4">
-                <div className="single_blog_item">
-                  <div className="single_blog_img">
-                    <img src="/img/food_item/food_item_1.png" alt="" />
-                  </div>
-                  <div className="single_blog_text">
-                    <h3>Indian Burger</h3>
+              <div className="col-lg-6">
+                <div className="regervation_part_iner">
+                  <form>
+                    <div className="form-row">
+                      <div className="form-group col-md-6">
+                        <input
+                          type="email"
+                          className="form-control"
+                          id="inputEmail4"
+                          placeholder="Name *"
+                        />
+                      </div>
+                      <div className="form-group col-md-6">
+                        <input
+                          type="password"
+                          className="form-control"
+                          id="inputPassword4"
+                          placeholder="Email address *"
+                        />
+                      </div>
+                      <div className="form-group col-md-6">
+                        <select className="form-control" id="Select">
+                          <option value="1" selected>
+                            Persons *
+                          </option>
+                          <option value="2">Number of guests 1</option>
+                          <option value="3">Number of guests 2</option>
+                          <option value="4">Number of guests 3</option>
+                          <option value="5">Number of guests 4</option>
+                        </select>
+                      </div>
+                      <div className="form-group col-md-6">
+                        <input
+                          type="text"
+                          className="form-control"
+                          id="pnone"
+                          placeholder="Phone number *"
+                        />
+                      </div>
+                      <div className="form-group col-md-6">
+                        <div className="input-group date">
+                          <input
+                            id="datepicker"
+                            type="text"
+                            className="form-control"
+                            placeholder="Date *"
+                          />
+                        </div>
+                      </div>
+                      <div className="form-group col-md-6">
+                        <select className="form-control" id="Select2">
+                          <option value="" selected>
+                            Time *
+                          </option>
+                          <option value="1">8 AM TO 10AM</option>
+                          <option value="1">10 AM TO 12PM</option>
+                          <option value="1">12PM TO 2PM</option>
+                          <option value="1">2PM TO 4PM</option>
+                          <option value="1">4PM TO 6PM</option>
+                          <option value="1">6PM TO 8PM</option>
+                          <option value="1">4PM TO 10PM</option>
+                          <option value="1">10PM TO 12PM</option>
+                        </select>
+                      </div>
+                      <div className="form-group col-md-12">
+                        <textarea
+                          className="form-control"
+                          id="Textarea"
+                          rows={4}
+                          placeholder="Your Note *"
+                        ></textarea>
+                      </div>
+                    </div>
+
+                    <div className="regerv_btn">
+                      <a href="#" className="btn_4">
+                        Book A Table
+                      </a>
+                    </div>
                     <p>
-                      Was brean shed moveth day yielding tree yielding day were
-                      female and{" "}
+                      Not sure what to do? Chat with our{" "}
+                      <button
+                        className="text-white"
+                        type="button"
+                        onClick={() => handleOpenModal(true)}
+                      >
+                        customer support
+                      </button>
                     </p>
-                    <a href="#" className="btn_3">
-                      Read More <img src="/img/icon/left_2.svg" alt="" />
-                    </a>
-                  </div>
-                </div>
-              </div>
-              <div className="col-sm-6 col-lg-4">
-                <div className="single_blog_item">
-                  <div className="single_blog_img">
-                    <img src="/img/food_item/food_item_2.png" alt="" />
-                  </div>
-                  <div className="single_blog_text">
-                    <h3>Cremy Noodles</h3>
-                    <p>
-                      Was brean shed moveth day yielding tree yielding day were
-                      female and{" "}
-                    </p>
-                    <a href="#" className="btn_3">
-                      Read More <img src="/img/icon/left_2.svg" alt="" />
-                    </a>
-                  </div>
-                </div>
-              </div>
-              <div className="col-sm-6 col-lg-4">
-                <div className="single_blog_item">
-                  <div className="single_blog_img">
-                    <img src="/img/food_item/food_item_3.png" alt="" />
-                  </div>
-                  <div className="single_blog_text">
-                    <h3>Honey Meat</h3>
-                    <p>
-                      Was brean shed moveth day yielding tree yielding day were
-                      female and{" "}
-                    </p>
-                    <a href="#" className="btn_3">
-                      Read More <img src="/img/icon/left_2.svg" alt="" />
-                    </a>
-                  </div>
-                </div>
-              </div>
-              <div className="col-sm-6 col-lg-4 d-none d-sm-block d-lg-none">
-                <div className="single_blog_item">
-                  <div className="single_blog_img">
-                    <img src="/img/food_item/food_item_1.png" alt="" />
-                  </div>
-                  <div className="single_blog_text">
-                    <h3>Cremy Noodles</h3>
-                    <p>
-                      Was brean shed moveth day yielding tree yielding day were
-                      female and{" "}
-                    </p>
-                    <a href="#" className="btn_3">
-                      Read More <img src="/img/icon/left_2.svg" alt="" />
-                    </a>
-                  </div>
+                  </form>
                 </div>
               </div>
             </div>
           </div>
         </section>
+
 
         <section className="about_part">
           <div className="container-fluid">
@@ -263,6 +288,10 @@ export default function Home() {
             </div>
           </div>
         </section>
+
+
+    
+
 
         <section className="food_menu gray_bg">
           <div className="container">
@@ -765,358 +794,7 @@ export default function Home() {
           </div>
         </section>
 
-        <section className="chefs_part blog_item_section section_padding">
-          <div className="container">
-            <div className="row">
-              <div className="col-xl-5">
-                <div className="section_tittle">
-                  <p>Team Member</p>
-                  <h2>Our Experience Chefs</h2>
-                </div>
-              </div>
-            </div>
-            <div className="row">
-              <div className="col-sm-6 col-lg-4">
-                <div className="single_blog_item">
-                  <div className="single_blog_img">
-                    <img src="/img/team/chefs_1.png" alt="" />
-                  </div>
-                  <div className="single_blog_text text-center">
-                    <h3>Adam Billiard</h3>
-                    <p>Chef Master</p>
-                    <div className="social_icon">
-                      <a href="#">
-                        {" "}
-                        <i className="ti-facebook"></i>{" "}
-                      </a>
-                      <a href="#">
-                        {" "}
-                        <i className="ti-twitter-alt"></i>{" "}
-                      </a>
-                      <a href="#">
-                        {" "}
-                        <i className="ti-instagram"></i>{" "}
-                      </a>
-                      <a href="#">
-                        {" "}
-                        <i className="ti-skype"></i>{" "}
-                      </a>
-                    </div>
-                  </div>
-                </div>
-              </div>
-              <div className="col-sm-6 col-lg-4">
-                <div className="single_blog_item">
-                  <div className="single_blog_img">
-                    <img src="/img/team/chefs_2.png" alt="" />
-                  </div>
-                  <div className="single_blog_text text-center">
-                    <h3>Fred Macyard</h3>
-                    <p>Chef Master</p>
-                    <div className="social_icon">
-                      <a href="#">
-                        {" "}
-                        <i className="ti-facebook"></i>{" "}
-                      </a>
-                      <a href="#">
-                        {" "}
-                        <i className="ti-twitter-alt"></i>{" "}
-                      </a>
-                      <a href="#">
-                        {" "}
-                        <i className="ti-instagram"></i>{" "}
-                      </a>
-                      <a href="#">
-                        {" "}
-                        <i className="ti-skype"></i>{" "}
-                      </a>
-                    </div>
-                  </div>
-                </div>
-              </div>
-              <div className="col-sm-6 col-lg-4">
-                <div className="single_blog_item">
-                  <div className="single_blog_img">
-                    <img src="/img/team/chefs_3.png" alt="" />
-                  </div>
-                  <div className="single_blog_text text-center">
-                    <h3>Justin Stuard</h3>
-                    <p>Chef Master</p>
-                    <div className="social_icon">
-                      <a href="#">
-                        {" "}
-                        <i className="ti-facebook"></i>{" "}
-                      </a>
-                      <a href="#">
-                        {" "}
-                        <i className="ti-twitter-alt"></i>{" "}
-                      </a>
-                      <a href="#">
-                        {" "}
-                        <i className="ti-instagram"></i>{" "}
-                      </a>
-                      <a href="#">
-                        {" "}
-                        <i className="ti-skype"></i>{" "}
-                      </a>
-                    </div>
-                  </div>
-                </div>
-              </div>
-              <div className="col-sm-6 col-lg-4 d-none d-sm-block d-lg-none">
-                <div className="single_blog_item">
-                  <div className="single_blog_img">
-                    <img src="/img/team/chefs_1.png" alt="" />
-                  </div>
-                  <div className="single_blog_text text-center">
-                    <h3>Justin Stuard</h3>
-                    <p>Chef Master</p>
-                    <div className="social_icon">
-                      <a href="#">
-                        {" "}
-                        <i className="ti-facebook"></i>{" "}
-                      </a>
-                      <a href="#">
-                        {" "}
-                        <i className="ti-twitter-alt"></i>{" "}
-                      </a>
-                      <a href="#">
-                        {" "}
-                        <i className="ti-instagram"></i>{" "}
-                      </a>
-                      <a href="#">
-                        {" "}
-                        <i className="ti-skype"></i>{" "}
-                      </a>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-        </section>
-
-        <section id="book_a_table" className="regervation_part section_padding">
-          <div className="container">
-            <div className="row">
-              <div className="col-xl-5">
-                <div className="section_tittle">
-                  <p>Reservation</p>
-                  <h2>Book A Table</h2>
-                </div>
-              </div>
-            </div>
-            <div className="row">
-              <div className="col-lg-6">
-                <div className="regervation_part_iner">
-                  <form>
-                    <div className="form-row">
-                      <div className="form-group col-md-6">
-                        <input
-                          type="email"
-                          className="form-control"
-                          id="inputEmail4"
-                          placeholder="Name *"
-                        />
-                      </div>
-                      <div className="form-group col-md-6">
-                        <input
-                          type="password"
-                          className="form-control"
-                          id="inputPassword4"
-                          placeholder="Email address *"
-                        />
-                      </div>
-                      <div className="form-group col-md-6">
-                        <select className="form-control" id="Select">
-                          <option value="1" selected>
-                            Persons *
-                          </option>
-                          <option value="2">Number of guests 1</option>
-                          <option value="3">Number of guests 2</option>
-                          <option value="4">Number of guests 3</option>
-                          <option value="5">Number of guests 4</option>
-                        </select>
-                      </div>
-                      <div className="form-group col-md-6">
-                        <input
-                          type="text"
-                          className="form-control"
-                          id="pnone"
-                          placeholder="Phone number *"
-                        />
-                      </div>
-                      <div className="form-group col-md-6">
-                        <div className="input-group date">
-                          <input
-                            id="datepicker"
-                            type="text"
-                            className="form-control"
-                            placeholder="Date *"
-                          />
-                        </div>
-                      </div>
-                      <div className="form-group col-md-6">
-                        <select className="form-control" id="Select2">
-                          <option value="" selected>
-                            Time *
-                          </option>
-                          <option value="1">8 AM TO 10AM</option>
-                          <option value="1">10 AM TO 12PM</option>
-                          <option value="1">12PM TO 2PM</option>
-                          <option value="1">2PM TO 4PM</option>
-                          <option value="1">4PM TO 6PM</option>
-                          <option value="1">6PM TO 8PM</option>
-                          <option value="1">4PM TO 10PM</option>
-                          <option value="1">10PM TO 12PM</option>
-                        </select>
-                      </div>
-                      <div className="form-group col-md-12">
-                        <textarea
-                          className="form-control"
-                          id="Textarea"
-                          rows={4}
-                          placeholder="Your Note *"
-                        ></textarea>
-                      </div>
-                    </div>
-
-                    <div className="regerv_btn">
-                      <a href="#" className="btn_4">
-                        Book A Table
-                      </a>
-                    </div>
-                    <p>
-                      Not sure what to do? Chat with our{" "}
-                      <a href="/chat">customer support</a>
-                    </p>
-                  </form>
-                </div>
-              </div>
-            </div>
-          </div>
-        </section>
-
-  
-        <section className="blog_item_section blog_section section_padding">
-          <div className="container">
-            <div className="row">
-              <div className="col-xl-5">
-                <div className="section_tittle">
-                  <p>Recent News</p>
-                  <h2>Latest From Blog</h2>
-                </div>
-              </div>
-            </div>
-            <div className="row">
-              <div className="col-sm-6 col-lg-4">
-                <div className="single_blog_item">
-                  <div className="single_blog_img">
-                    <img src="/img/blog/blog_1.png" alt="" />
-                  </div>
-                  <div className="single_blog_text">
-                    <div className="date">
-                      <a href="#" className="date_item">
-                        Apr 06, 2019{" "}
-                      </a>
-                      <a href="#" className="date_item">
-                        {" "}
-                        <span>#</span> Food News{" "}
-                      </a>
-                    </div>
-                    <h3>
-                      <a href="blog.html">
-                        Adama kind deep gatherin first over fter his great
-                      </a>
-                    </h3>
-                    <a href="#" className="btn_3">
-                      Read More <img src="/img/icon/left_1.svg" alt="" />
-                    </a>
-                  </div>
-                </div>
-              </div>
-              <div className="col-sm-6 col-lg-4">
-                <div className="single_blog_item">
-                  <div className="single_blog_img">
-                    <img src="/img/blog/blog_2.png" alt="" />
-                  </div>
-                  <div className="single_blog_text">
-                    <div className="date">
-                      <a href="#" className="date_item">
-                        Apr 06, 2019{" "}
-                      </a>
-                      <a href="#" className="date_item">
-                        {" "}
-                        <span>#</span> Food News{" "}
-                      </a>
-                    </div>
-                    <h3>
-                      <a href="blog.html">
-                        Adama kind deep gatherin first over fter his great
-                      </a>
-                    </h3>
-                    <a href="#" className="btn_3">
-                      Read More <img src="/img/icon/left_1.svg" alt="" />
-                    </a>
-                  </div>
-                </div>
-              </div>
-              <div className="col-sm-6 col-lg-4">
-                <div className="single_blog_item">
-                  <div className="single_blog_img">
-                    <img src="/img/blog/blog_3.png" alt="" />
-                  </div>
-                  <div className="single_blog_text">
-                    <div className="date">
-                      <a href="#" className="date_item">
-                        Apr 06, 2019{" "}
-                      </a>
-                      <a href="#" className="date_item">
-                        {" "}
-                        <span>#</span> Food News{" "}
-                      </a>
-                    </div>
-                    <h3>
-                      <a href="blog.html">
-                        Adama kind deep gatherin first over fter his great
-                      </a>
-                    </h3>
-                    <a href="#" className="btn_3">
-                      Read More <img src="/img/icon/left_1.svg" alt="" />
-                    </a>
-                  </div>
-                </div>
-              </div>
-              <div className="col-sm-6 col-lg-4 d-none d-sm-block d-lg-none">
-                <div className="single_blog_item">
-                  <div className="single_blog_img">
-                    <img src="/img/blog/blog_1.png" alt="" />
-                  </div>
-                  <div className="single_blog_text">
-                    <div className="date">
-                      <a href="#" className="date_item">
-                        Apr 06, 2019{" "}
-                      </a>
-                      <a href="#" className="date_item">
-                        {" "}
-                        <span>#</span> Food News{" "}
-                      </a>
-                    </div>
-                    <h3>
-                      <a href="blog.html">
-                        Adama kind deep gatherin first over fter his great
-                      </a>
-                    </h3>
-                    <a href="#" className="btn_3">
-                      Read More <img src="/img/icon/left_1.svg" alt="" />
-                    </a>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-        </section>
-
+     
         <footer className="footer-area">
           <div className="container">
             <div className="row">

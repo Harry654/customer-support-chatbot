@@ -1,4 +1,4 @@
-import { db } from "@/lib/firebase/config";
+import { auth, db } from "@/lib/firebase/config";
 import { TReservation } from "@/types";
 import { doc, setDoc } from "firebase/firestore";
 import { sendEmail } from "../nodemailer/nodemailer";
@@ -18,12 +18,16 @@ async function createReservation(reservation: TReservation) {
     const reservationId = generateRandomId(); // Unique ID for the reservation
     const reservationRef = doc(db, "reservations", reservationId);
 
-    await setDoc(reservationRef, {
+    let reservationData: TReservation = {
       email: reservation.email,
       date: reservation.date,
       guests: reservation.guests,
       name: reservation.name,
-    });
+    };
+    if (auth.currentUser)
+      reservationData = { ...reservationData, user_id: auth.currentUser.uid };
+
+    await setDoc(reservationRef, reservationData);
 
     sendEmail(
       reservation.email,

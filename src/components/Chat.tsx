@@ -5,8 +5,9 @@ import { initialChat } from "@/utils/initialChatLlama";
 import { Message } from "@aws-sdk/client-bedrock-runtime";
 import { Box, Button, Stack, TextField } from "@mui/material";
 import { useEffect, useRef, useState } from "react";
+import { BeatLoader } from "react-spinners";
 
-export default function ChatGemini() {
+export default function Chat() {
   const { messages, updateMessages } = useChat();
   const [message, setMessage] = useState<string>("");
 
@@ -30,6 +31,14 @@ export default function ChatGemini() {
         content: [
           {
             text: message.trim(),
+          },
+        ],
+      },
+      {
+        role: "assistant",
+        content: [
+          {
+            text: "",
           },
         ],
       },
@@ -112,87 +121,77 @@ export default function ChatGemini() {
   }, [messages]);
 
   return (
-    <Box
-      width="100%"
-      height="100%"
-      top="0"
-      left="0"
-      display="flex"
-      flexDirection="column"
-      justifyContent="center"
-      alignItems="center"
-      bgcolor="rgba(0, 0, 0, 0.9)"
+    <Stack
+      direction={"column"}
+      // width="500px"
+      height="600px"
+      className="w-96 md:w-[30rem] lg:w-[50rem]"
+      p={2}
+      spacing={3}
+      sx={{
+        backdropFilter: "blur(5px)",
+        backgroundColor: "rgba(0, 0, 0, 0.5)",
+      }}
     >
       <Stack
         direction={"column"}
-        width="500px"
-        height="600px"
-        p={2}
-        spacing={3}
-        sx={{
-          backdropFilter: "blur(5px)",
-          backgroundColor: "rgba(0, 0, 0, 0.9)",
-        }}
+        spacing={2}
+        flexGrow={1}
+        overflow="auto"
+        maxHeight="100%"
       >
-        <Stack
-          direction={"column"}
-          spacing={2}
-          flexGrow={1}
-          overflow="auto"
-          maxHeight="100%"
-        >
-          {messages.slice(1).map((message, index) => (
-            <Box
-              key={index}
-              display="flex"
-              justifyContent={
-                message.role === "assistant" ? "flex-start" : "flex-end"
-              }
-            >
-              <Box
-                sx={{
-                  bgcolor:
-                    message.role === "assistant"
-                      ? "primary.main"
-                      : "warning.main",
-                }}
-                color={"white"}
-                borderRadius={2}
-                px={2}
-                py={2}
-                maxWidth="80%"
-              >
-                {message.content?.[0]?.text}
-              </Box>
-            </Box>
-          ))}
-
-          <div ref={messagesEndRef} />
-        </Stack>
-        <Stack direction={"row"} spacing={2}>
-          <TextField
-            label="Message"
-            fullWidth
-            value={message}
-            onChange={(e) => setMessage(e.target.value)}
-            onKeyPress={handleKeyPress}
-            disabled={isLoading}
-            InputProps={{
-              style: { color: "white" }, // Change input text color to white
-            }}
-            InputLabelProps={{
-              style: { color: "white" }, // Change label color to white
-            }}
-          />
-          <Button
-            variant="contained"
-            onClick={sendMessage}
-            disabled={isLoading}
+        {messages.slice(1).map((message, index) => (
+          <Box
+            key={index}
+            display="flex"
+            justifyContent={
+              message.role === "assistant" ? "flex-start" : "flex-end"
+            }
           >
-            {isLoading ? "Sending..." : "Send"}
-          </Button>
-        </Stack>
+            <Box
+              sx={{
+                bgcolor:
+                  message.role === "assistant"
+                    ? "primary.main"
+                    : "warning.main",
+              }}
+              color={"white"}
+              borderRadius={2}
+              px={2}
+              py={2}
+              maxWidth="80%"
+            >
+              {message.content?.[0]?.text ? (
+                message.content?.[0]?.text
+              ) : (
+                <BeatLoader size={10} color="white" />
+              )}
+            </Box>
+          </Box>
+        ))}
+
+        <div ref={messagesEndRef} />
       </Stack>
-    </Box>
+      <Stack direction={"row"} spacing={2}>
+        <TextField
+          label="Message"
+          fullWidth
+          value={message}
+          onChange={(e) => setMessage(e.target.value)}
+          onKeyPress={handleKeyPress}
+          disabled={isLoading}
+          InputProps={{
+            style: { color: "white" }, // Change input text color to white
+          }}
+          InputLabelProps={{
+            style: { color: "white" }, // Change label color to white
+          }}
+          className="rounded-full border focus-within:border-none"
+        />
+        <Button variant="contained" onClick={sendMessage} disabled={isLoading}>
+          {isLoading ? "Sending..." : "Send"}
+        </Button>
+      </Stack>
+    </Stack>
   );
 }
