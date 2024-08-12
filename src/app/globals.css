@@ -1,3 +1,7 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
 * {
   margin: 0;
   scroll-behavior: smooth;
@@ -54,7 +58,7 @@ body {
   bottom: -80px;
 }
 #login_box > form {
-  height: 520px;
+  /* height: 520px; */
   width: 400px;
   background-color: rgba(255, 255, 255, 0.13);
   position: absolute;
@@ -102,15 +106,15 @@ body {
   color: #e5e5e5;
 }
 #login_box > form button {
-  margin-top: 50px;
+  /* margin-top: 50px; */
   width: 100%;
-  background-color: #ffffff;
+  /* background-color: #ffffff; */
   color: #080710;
   padding: 15px 0;
   font-size: 18px;
   font-weight: 600;
   border-radius: 5px;
-  cursor: pointer;
+  /* cursor: pointer; */
 }
 #login_box > .social {
   margin-top: 30px;
