@@ -1,13 +1,16 @@
 "use client";
 
+import { useAuth } from "@/context/AuthContext";
 import { useChat } from "@/context/ChatContext";
 import { initialChat } from "@/utils/initialChatLlama";
 import { Message } from "@aws-sdk/client-bedrock-runtime";
 import { Box, Button, Stack, TextField } from "@mui/material";
+import Image from "next/image";
 import { useEffect, useRef, useState } from "react";
 import { BeatLoader } from "react-spinners";
 
 export default function Chat() {
+  const { user } = useAuth();
   const { messages, updateMessages } = useChat();
   const [message, setMessage] = useState<string>("");
 
@@ -123,31 +126,63 @@ export default function Chat() {
   return (
     <Stack
       direction={"column"}
-      // width="500px"
-      height="600px"
+      width="400px"
+      height="500px"
       className="w-96 md:w-[30rem] lg:w-[50rem]"
-      p={2}
-      spacing={3}
+      // spacing={3}
       sx={{
-        backdropFilter: "blur(5px)",
-        backgroundColor: "rgba(0, 0, 0, 0.5)",
+        // backdropFilter: "blur(5px)",
+        backgroundColor: "#FFFFFF",
+        // backgroundColor: "rgba(0, 0, 0, 0.5)",
+        borderTopLeftRadius: 20,
+        borderTopRightRadius: 20,
       }}
     >
+      <div
+        className="h-16 bg-[#FF6426] flex justify-end items-center gap-2 p-2"
+        style={{ borderTopLeftRadius: 20, borderTopRightRadius: 20 }}
+      >
+        {user && (
+          <>
+            <p className="text-white font-bold">{user?.displayName}</p>
+            <Image
+              src={user?.photoURL || ""}
+              width={0}
+              height={0}
+              alt="profile"
+              className="rounded-full h-10 w-10"
+            />
+          </>
+        )}
+      </div>
       <Stack
         direction={"column"}
+        p={1}
         spacing={2}
         flexGrow={1}
         overflow="auto"
         maxHeight="100%"
       >
         {messages.slice(1).map((message, index) => (
-          <Box
+          <Stack
             key={index}
+            direction={message.role === "assistant" ? "row" : "row-reverse"}
             display="flex"
-            justifyContent={
+            alignContent={
               message.role === "assistant" ? "flex-start" : "flex-end"
             }
+            spacing={1}
+            // border="1px solid black"
           >
+            {message.role === "assistant" && (
+              <Image
+                src="/images/bg.jpg"
+                width={10}
+                height={10}
+                alt="profile"
+                className="rounded-full h-7 w-7"
+              />
+            )}
             <Box
               sx={{
                 bgcolor:
@@ -167,12 +202,12 @@ export default function Chat() {
                 <BeatLoader size={10} color="white" />
               )}
             </Box>
-          </Box>
+          </Stack>
         ))}
 
         <div ref={messagesEndRef} />
       </Stack>
-      <Stack direction={"row"} spacing={2}>
+      <Stack direction={"row"} spacing={2} p={2}>
         <TextField
           label="Message"
           fullWidth
@@ -180,13 +215,7 @@ export default function Chat() {
           onChange={(e) => setMessage(e.target.value)}
           onKeyPress={handleKeyPress}
           disabled={isLoading}
-          InputProps={{
-            style: { color: "white" }, // Change input text color to white
-          }}
-          InputLabelProps={{
-            style: { color: "white" }, // Change label color to white
-          }}
-          className="rounded-full border focus-within:border-none"
+          // className="rounded-full border focus-within:border-none"
         />
         <Button variant="contained" onClick={sendMessage} disabled={isLoading}>
           {isLoading ? "Sending..." : "Send"}

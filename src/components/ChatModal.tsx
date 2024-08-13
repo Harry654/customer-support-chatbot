@@ -4,17 +4,17 @@ import { motion, AnimatePresence } from "framer-motion";
 
 const Overlay = styled(motion.div)`
   position: fixed;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  background: rgba(0, 0, 0, 0.8);
+  // bottom: 0;
+  // left: 0;
+  // width: 100%;
+  height: min-content;
+  // background: rgba(0, 0, 0, 0.8);
 `;
 const ModalContainer = styled(motion.div)`
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
+  // position: absolute;
+  // top: 50%;
+  // left: 50%;
+  // transform: translate(-50%, -50%);
   // border: 1px solid rgba(255, 255, 255, 1);
 `;
 const CloseButton = styled.svg`
@@ -38,9 +38,9 @@ const modalVariant = {
   exit: { opacity: 0 },
 };
 const containerVariant = {
-  initial: { top: "-50%", transition: { type: "spring" } },
-  isOpen: { top: "50%" },
-  exit: { top: "-50%" },
+  // initial: { bottom: "-50%", transition: { type: "spring" } },
+  // isOpen: { bottom: "160px", right: "40px", top: "40px" },
+  // exit: { bottom: "-50%" },
 };
 
 interface Props {
@@ -58,10 +58,10 @@ const ChatModal: React.FC<Props> = ({ handleClose, children, isOpen }) => {
           animate={"isOpen"}
           exit={"exit"}
           variants={modalVariant}
-          className="z-50"
+          className="z-50 bottom-40 right-10 top-10"
         >
           <ModalContainer variants={containerVariant}>
-            <CloseButton
+            {/* <CloseButton
               onClick={handleClose}
               xmlns="http://www.w3.org/2000/svg"
               viewBox="0 0 20.39 20.39"
@@ -89,7 +89,7 @@ const ChatModal: React.FC<Props> = ({ handleClose, children, isOpen }) => {
                 strokeMiterlimit="10"
                 strokeWidth="2"
               />
-            </CloseButton>
+            </CloseButton> */}
             {children}
           </ModalContainer>
         </Overlay>

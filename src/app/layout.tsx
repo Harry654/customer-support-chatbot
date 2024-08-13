@@ -3,6 +3,8 @@ import { Inter } from "next/font/google";
 import "./globals.css";
 import { AuthProvider } from "@/context/AuthContext";
 import { ChatProvider } from "@/context/ChatContext";
+import NavBar from "@/components/layout/NavBar";
+import ChatBot from "@/components/ChatBot";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -37,14 +39,23 @@ export default function RootLayout({
         <link rel="stylesheet" href="/css/all.css" />
         <link rel="stylesheet" href="/css/style.css" />
         <link rel="preconnect" href="https://fonts.gstatic.com" />
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css" />
-    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;500;600&display=swap" rel="stylesheet" />
-   
+        <link
+          rel="stylesheet"
+          href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css"
+        />
+        <link
+          href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;500;600&display=swap"
+          rel="stylesheet"
+        />
       </head>
 
       <body className={inter.className}>
         <AuthProvider>
-          <ChatProvider>{children}</ChatProvider>
+          <ChatProvider>
+            <NavBar />
+            <ChatBot />
+            {children}
+          </ChatProvider>
         </AuthProvider>
       </body>
     </html>
