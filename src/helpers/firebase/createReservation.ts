@@ -20,13 +20,8 @@ async function createReservation(reservation: TReservationTicket) {
     const reservationRef = doc(db, "reservations", reservationId);
 
     let reservationData: TReservationTicket = {
-      email: reservation.email,
-      date: reservation.date,
-      guests: reservation.guests,
-      name: reservation.name,
-      status: "pending",
+      ...reservation,
       ticket_id: reservationId,
-      created_at: Timestamp.now(),
     };
     // console.log("userrrrrrrrr", await getCurrentUser());
     // console.log("idddddddddddd", auth.currentUser?.uid);

@@ -1,6 +1,7 @@
 import { IFirebaseActionData, TReservationTicket } from "@/types";
 import createReservation from "./firebase/createReservation";
 import { convertToFirebaseTimestamp } from "./firebase/convertToFirebaseTimestamp";
+import { Timestamp } from "firebase/firestore";
 
 export async function processLlamaResponse(responseText: string) {
   // Regular expression to match the REQUIRES_FIREBASE_ACTION pattern
@@ -39,6 +40,9 @@ async function handleFirebaseAction(actionData: IFirebaseActionData) {
         date: firebaseTimestamp,
         guests: actionData.guests,
         name: actionData.name,
+        status: "pending",
+        ticket_id: "",
+        created_at: Timestamp.now(),
       };
       // Call your function to insert data into Firebase
       createReservation(data);
