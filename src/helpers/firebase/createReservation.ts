@@ -1,6 +1,6 @@
 import { auth, db } from "@/lib/firebase/config";
-import { TReservation } from "@/types";
-import { doc, setDoc } from "firebase/firestore";
+import { TReservationTicket } from "@/types";
+import { doc, setDoc, Timestamp } from "firebase/firestore";
 import { sendEmail } from "../nodemailer";
 import { generateRandomId } from "../generateRandomId";
 import { getCurrentUser } from "../getCurrentUser";
@@ -14,16 +14,19 @@ import { getCurrentUser } from "../getCurrentUser";
  * @param {number} reservation.name - Number of guests for the reservation
  */
 
-async function createReservation(reservation: TReservation) {
+async function createReservation(reservation: TReservationTicket) {
   try {
     const reservationId = generateRandomId(); // Unique ID for the reservation
     const reservationRef = doc(db, "reservations", reservationId);
 
-    let reservationData: TReservation = {
+    let reservationData: TReservationTicket = {
       email: reservation.email,
       date: reservation.date,
       guests: reservation.guests,
       name: reservation.name,
+      status: "pending",
+      ticket_id: reservationId,
+      created_at: Timestamp.now(),
     };
     // console.log("userrrrrrrrr", await getCurrentUser());
     // console.log("idddddddddddd", auth.currentUser?.uid);

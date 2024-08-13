@@ -18,10 +18,13 @@ export type IFirebaseActionData = {
   name: string;
 };
 
-export type TReservation = {
+export type TReservationTicket = {
+  ticket_id: string;
   user_id?: string;
-  email: string;
-  date: Timestamp;
-  guests: number;
   name: string;
+  email: string;
+  guests: number;
+  date: Timestamp;
+  status: "pending" | "confirmed";
+  created_at: Timestamp;
 };

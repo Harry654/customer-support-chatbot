@@ -1,4 +1,4 @@
-import { IFirebaseActionData, TReservation } from "@/types";
+import { IFirebaseActionData, TReservationTicket } from "@/types";
 import createReservation from "./firebase/createReservation";
 import { convertToFirebaseTimestamp } from "./firebase/convertToFirebaseTimestamp";
 
@@ -34,7 +34,7 @@ async function handleFirebaseAction(actionData: IFirebaseActionData) {
         actionData.time
       );
 
-      const data: TReservation = {
+      const data: TReservationTicket = {
         email: actionData.email,
         date: firebaseTimestamp,
         guests: actionData.guests,
